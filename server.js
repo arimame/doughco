@@ -11,7 +11,11 @@ const app         = express();
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
+// morgan is used for logging request details.
+// `dev` is a predefined format for morgan to use.
 const morgan      = require('morgan');
+// i'm assuming knex logger does the same for database
+// modifications.
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
