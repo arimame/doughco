@@ -8,7 +8,9 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("food")
+      .from("food_location_join")
+      .join("food", "food_id", "=", "id")
+      .where("location_id", foo)
       .then((results) => {
         res.json(results);
     });
