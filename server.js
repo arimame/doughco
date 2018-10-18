@@ -11,16 +11,21 @@ const app         = express();
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
-// morgan is used for logging request details.
-// `dev` is a predefined format for morgan to use.
 const morgan      = require('morgan');
-// i'm assuming knex logger does the same for database
-// modifications.
 const knexLogger  = require('knex-logger');
+
+const cookieMonster = require('cookie-session');
+app.use(cookieMonster({
+	name: 'session',
+	keys: ['hgiehgiehiwheihge', 'eutiewginibebi']
+}));
+const bcrypt = require('bcrypt');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const foodRoutes = require("./routes/food");
+
+const userHelpers = require('./lib/user-helpers');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,11 +52,16 @@ app.use("/api/food", foodRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+  console.log(req.session);
 });
 
-app.get("/test", (req, res) => {
-	res.render("test");
-});
+app.post("/login", (req, res) => {
+	const {email, password} = req.body || undefined;
+	const user_id = userHelpers.generateAlphanumericString();
+	const hashedPassword = bcrypt.hashSync(password, 10);
+	req.session.user_id = user_id;
+	res.redirect('/');
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
