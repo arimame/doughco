@@ -60,7 +60,7 @@ app.get("/myaccount", (req, res) => {
 
 app.get("/locations/:id", (req, res) => {
   let location_id = req.params.id;
-  let templateVars = {location_id: location_id};
+  let templateVars = {location_id: location_id, currUser: req.session.user};
   res.render("menu", templateVars);
 });
 
@@ -68,6 +68,10 @@ app.get('/logout', (req, res) => {
 	req.session = null;
 	res.redirect('/');
 })
+
+// app.post("/locations/:loc_id/food/:food_id"), (req, res) => {
+
+// }
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
