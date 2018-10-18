@@ -1,7 +1,27 @@
-body {
-  background-color: #EEE;
 
-  h1 {
-    color: #244751;
-  }
+/*fonts*/
+$logo-font:'Bungee Shade', cursive;
+$heading-font: 'Arbutus Slab', serif;
+$text-font: 'Chivo', sans-serif;
+
+/*colors*/
+$mint-color: #ddfff7;
+$darkermint-color: #93e1d8;
+$watermelon-color: #ffa69e;
+$raspberry-color: #aa4465;
+$darkberry-color: #861657;
+
+
+.main-heading {
+color: $darkberry-color;
+font-family: $heading-font;
+font-size: 2em;
+padding: 10px 0;
 }
+
+.subheading {
+color: $watermelon-color;
+font-family: $heading-font;;
+font-size: 1.25em;
+}
+
