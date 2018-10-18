@@ -50,11 +50,17 @@ app.use("/api/food", foodRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  res.redirect("/locations");
+});
+
+app.get("/locations", (req, res) => {
   res.render("index");
 });
 
-app.get("/menu", (req, res) => {
-  res.render("menu");
+app.get("/locations/:id", (req, res) => {
+  let location_id = req.params.id;
+  let templateVars = {location_id: location_id};
+  res.render("menu", templateVars);
 });
 
 app.listen(PORT, () => {
