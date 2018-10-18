@@ -32,20 +32,20 @@ $(() => {
           </div>
 
           <div class="row">
-           <form method="POST" action="locations/${foo}/food/${foods[i].id}">
+           <form>
 
               <div class="col-lg-4">
                 <div class="qty mt-5">
                 <span class="minus bg-dark">-</span>
-                  <input type="number" class="count" name="qty" value="1">
+                  <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="3">
                 <span class="plus bg-dark">+</span>
                </div>
               </div>
               <div class="col-lg-4">
-               <input type="submit" value="Add to cart">
+               <button class="toCart" onclick="add(${foods[i].id}, 'donut-qty-${foods[i].id}')" type="button"> Add to cart </button>
               </div>
                  <div class="col-lg-4">
-               <select name="size">
+               <select id="donut-size-${foods[i].id}" name="size">
                   <option>Individual</option>
                   <option>Dozen</option>
                 </select>
@@ -89,4 +89,37 @@ $(() => {
     //   $("<div>").text(food.name).appendTo($("body"));
     // }
   });;
+
 });
+
+function add(id, qtyId) {
+
+  let idStr = String(id)
+  let qty = $('#'+qtyId).val();
+
+  console.log(idStr, qty);
+
+  let cookies = document.cookie;
+  let cookieArr = cookies.split(";");
+  let cookieArrArr = [];
+  for (let cookie of cookieArr) {
+    cookieArrArr.push(cookie.split("="))
+  }
+
+  for (let arr of cookieArrArr) {
+    if (idStr === arr[0]) {
+      let newCookie = Number(arr[1]) + Number(qty);
+      document.cookie = `${idStr}=${newCookie}`
+      console.log(newCookie);
+    } else {
+      document.cookie = `${idStr}=${qty}`
+    }
+  }
+
+
+
+  console.log(cookieArrArr);
+
+  // console.log(test);
+
+}
