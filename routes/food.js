@@ -5,12 +5,13 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  router.get("/", (req, res) => {
+  router.get("/:id", (req, res) => {
+    let loc = req.params.id;
     knex
       .select("*")
       .from("food_location_join")
       .join("food", "food_id", "=", "id")
-      .where("location_id", foo)
+      .where("location_id", loc)
       .then((results) => {
         res.json(results);
     });

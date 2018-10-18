@@ -67,6 +67,10 @@ app.get("/locations/:id", (req, res) => {
   res.render("menu", templateVars);
 });
 
+// app.post("/locations/:loc_id/food/:food_id"), (req, res) => {
+
+// }
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
