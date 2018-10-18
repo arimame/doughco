@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt  = require('bcrypt');
 const router  = express.Router();
 
 module.exports = (knex) => {
@@ -26,10 +26,10 @@ module.exports = (knex) => {
   			password: hashedPassword
   		})
   		.then((results) => {
-  			console.log('Added user to db');
+  			console.log(`\nAdded ${email} to the database. Nifty.\n`);
+  			res.redirect('/');
   		});
 
-  	res.redirect('/');
   });
 
 	return router;

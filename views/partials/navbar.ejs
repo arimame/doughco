@@ -7,16 +7,24 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">my account</a>
-      <a class="nav-item nav-link" href="#">logout</a>
       
+      <% console.log(">>>>>>>>>", currUser) %>
+      <% if (currUser) { %>
+
+      <a class="nav-item nav-link" href="#">my account</a>
+      <a class="nav-item nav-link" href="/logout">logout</a>
+
+      <% } else { %>
+
       <form action="/login" method="POST">
 
       <input name="email" id="email" type="email" placeholder="email">
       <input name="password" id="password" type="password" placeholder="password">
       <button id="sign-in-button">sign in</button>
 
-    </form>
+      </form>
+
+      <% } %>
 
     </div>
   </div>

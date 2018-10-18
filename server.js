@@ -47,9 +47,13 @@ app.use("/api/food", foodRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
-  console.log(req.session);
+  res.render("index", {currUser: req.session.user});
 });
+
+app.get('/logout', (req, res) => {
+	req.session = null;
+	res.redirect('/');
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
