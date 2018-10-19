@@ -1,18 +1,15 @@
 $(() => {
 
-  let phone;
-  let email;
+  let phone, email;
 
   $.ajax({
     method: "GET",
     url: "/api/users/" + currUser
   }).done((user) => {
-      console.log('user details', user);
       phone = user[0].phone;
       email = user[0].email;
-      console.log(phone, email);
       $('#current-email').text(`Current email: ${email}`);
-      $('#current-phone').text(`Current phone number: ${phone || 'n/a'}`);
+      $('#current-phone').text(`Current phone number: ${phone || 'not set'}`);
     });
 
   $('#credit-card').submit(function(e) {
@@ -27,7 +24,6 @@ $(() => {
       }
     })
     .then(function(r) {
-      console.log('good');
       window.location.href = "/myaccount"
     });
   });

@@ -6,6 +6,7 @@ const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
+const sseExpress  = require('sse-express');
 const sass        = require("node-sass-middleware");
 const app         = express();
 
@@ -17,6 +18,7 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const foodRoutes = require("./routes/food");
+const order       = require('./lib/order-helpers');
 
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
@@ -27,6 +29,7 @@ app.use(cookieSession({
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
+// app.use(sseExpress());
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -44,6 +47,11 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/food", foodRoutes(knex));
+
+// Twilio
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AUTH;
+const client = require('twilio')(accountSid, authToken);
 
 // Home page
 app.get("/", (req, res) => {
@@ -64,9 +72,41 @@ app.get("/locations/:id", (req, res) => {
   res.render("menu", templateVars);
 });
 
+app.post('/sms', (req, res) => {
+  order.update(1);
+  res.end();
+}); 
+
+app.get('/sms', sseExpress(), function(req, res) {
+  function check() {
+    if (order.status === 1) {
+      res.sse({
+        event: 'received',
+        data: { welcomeMsg: 'Got a text back' }
+      });
+      order.update(0);
+      return;
+    }
+    setTimeout(check, 5000);
+  }
+  check();
+});
+
+app.post("/test", (req, res) => {
+  client.messages
+  .create({
+     body: 'IT WORKED',
+     from: '+16474944728',
+     mediaUrl: 'https://thumbs.gfycat.com/InsecureHandmadeArcticwolf-size_restricted.gif',
+     to: '+12047208938'
+   })
+  .then(message => console.log(message.sid))
+  .done();
+});
+
 app.get('/logout', (req, res) => {
 	req.session = null;
-	res.redirect('/');
+	res.redirect('locations');
 })
 
 // app.post("/locations/:loc_id/food/:food_id"), (req, res) => {
