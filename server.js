@@ -16,9 +16,11 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-const foodRoutes = require("./routes/food");
-const order       = require('./lib/order-helpers');
+const usersRoutes    = require("./routes/users");
+const foodRoutes     = require("./routes/food");
+const order          = require('./lib/order-helpers');
+const locationRoutes = require("./routes/location");
+
 
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
@@ -47,6 +49,7 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/food", foodRoutes(knex));
+app.use("/api/location", locationRoutes(knex));
 
 // Twilio
 const accountSid = process.env.TWILIO_SID;
@@ -104,10 +107,15 @@ app.post("/test", (req, res) => {
   .done();
 });
 
+app.get("/checkout", (req, res) => {
+  res.render("checkout", {currUser: req.session.user});
+
+});
+
 app.get('/logout', (req, res) => {
 	req.session = null;
 	res.redirect('locations');
-})
+});
 
 // app.post("/locations/:loc_id/food/:food_id"), (req, res) => {
 

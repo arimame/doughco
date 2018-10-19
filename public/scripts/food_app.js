@@ -1,5 +1,5 @@
 $(() => {
-  console.log(foo);
+  // console.log(foo);
   $.ajax({
     method: "GET",
     url: `/api/food/${foo}`
@@ -33,9 +33,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i].id}')">-</span>
+                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -71,9 +71,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i+1].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i+1].id}')">-</span>
+                      <input type="text" id="donut-qty-${foods[i+1].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i+1].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -86,7 +86,7 @@ $(() => {
         </div>
       `);
     }
-    console.log(i);
+    // console.log(i);
     if (i === foods.length - 1) {
       $(".container").append(`
         <div class="row">
@@ -114,9 +114,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i].id}')">-</span>
+                    <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -138,6 +138,19 @@ $(() => {
 
 });
 
+function minus(id) {
+  const $val = $('#'+id);
+  $val.val(parseInt($val.val()) - 1 )
+  if ($val.val() == 0) {
+    $val.val(1);
+  };
+}
+
+function plus(id) {
+  const $val = $('#'+id);
+  $val.val(parseInt($val.val()) + 1 )
+}
+
 function add(id, qtyId) {
 
   let idStr = String(id)
@@ -146,7 +159,7 @@ function add(id, qtyId) {
   // console.log(idStr, qty);
 
   let cookies = document.cookie;
-  console.log(cookies);
+  // console.log(cookies);
   let cookieArr = cookies.split("; ");
   // console.log(cookieArr);
   let cookieArrArr = [];
@@ -159,12 +172,12 @@ function add(id, qtyId) {
     // console.log(idStr === cookieArrArr[i][0]);
     // console.log(cookieArrArr[i][0]);
     if (i === cookieArrArr.length) {
-      document.cookie = `${idStr}=${qty}`
+      document.cookie = `${idStr}=${qty};path=/`
       updateCart(document.cookie)
     } else if (idStr === cookieArrArr[i][0]) {
       let newCookie = Number(cookieArrArr[i][1]) + Number(qty);
-      console.log(newCookie);
-      document.cookie = `${idStr}=${newCookie}`
+      // console.log(newCookie);
+      document.cookie = `${idStr}=${newCookie};path=/`
       updateCart(document.cookie)
       break;
     }
@@ -180,10 +193,20 @@ function updateCart(cookies) {
     cookieArrArr.push(cookie.split("="))
   }
 
+  cookieArrArr = cookieArrArr.sort((a, b) => {
+    // console.log(Number(a[0]), Number(b[0]));
+    if (Number(a[0]) < Number(b[0])) return -1;
+    if (Number(a[0]) > Number(b[0])) return 1;
+    return 0;
+  })
+
+  // console.log(cookieArrArr)
+
   const $cart = $("#cart");
 
   $cart.empty();
   let totalPrice = 0;
+  let totalQty = 0;
 
   for (let i = 0; i < cookieArrArr.length; i++) {
     $.ajax({
@@ -191,13 +214,36 @@ function updateCart(cookies) {
     url: `/api/food/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
-      console.log(food);
+      // console.log(food);
       $cart.append(`
-       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>`);
-      totalPrice += (food[0].price * cookieArrArr[i][1]).toFixed(2);
-  })
-   //   .done($cart.append(`<div>TOTAL: ${totalPrice}</div>`));
-   }
+       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
+      totalPrice += Number(food[0].price * cookieArrArr[i][1]);
+      totalQty += Number(cookieArrArr[i][1]);
+    })
+  }
 
+  setTimeout(function() {
+
+    let dozens = Math.floor(totalQty / 12);
+    let discount = dozens * 5.99;
+
+    if (dozens >= 1) {
+      $cart.append(`<div>Dozen Discount: -- $${discount.toFixed(2)}</div>`);
+    }
+
+    let tax = ((Number(totalPrice - discount) * 0.13));
+
+    $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
+
+    // console.log(totalPrice, discount, tax);
+
+    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
+
+  }, 100);
 
 };
+
+function remove(id) {
+  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  updateCart(document.cookie);
+}
