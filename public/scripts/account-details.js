@@ -12,7 +12,7 @@ $(() => {
       email = user[0].email;
       console.log(phone, email);
       $('#current-email').text(`Current email: ${email}`);
-      $('#current-phone').text(`Current phone number: ${phone}`);
+      $('#current-phone').text(`Current phone number: ${phone || 'n/a'}`);
     });
 
   $('#credit-card').submit(function(e) {
