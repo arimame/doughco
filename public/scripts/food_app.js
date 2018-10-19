@@ -193,6 +193,15 @@ function updateCart(cookies) {
     cookieArrArr.push(cookie.split("="))
   }
 
+  cookieArrArr = cookieArrArr.sort((a, b) => {
+    // console.log(Number(a[0]), Number(b[0]));
+    if (Number(a[0]) < Number(b[0])) return -1;
+    if (Number(a[0]) > Number(b[0])) return 1;
+    return 0;
+  })
+
+  console.log(cookieArrArr)
+
   const $cart = $("#cart");
 
   $cart.empty();
