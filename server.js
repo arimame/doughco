@@ -66,8 +66,8 @@ app.get("/locations/:id", (req, res) => {
   res.render("menu", templateVars);
 });
 
-app.get("/checkout", (req, res) => {
-  res.render("checkout", {currUser: req.session.user});
+app.get("/checkout/:id", (req, res) => {
+  res.render("checkout", {currUser: req.session.user, location_id: req.params.id});
 });
 
 app.get('/logout', (req, res) => {

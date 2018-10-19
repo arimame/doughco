@@ -1,6 +1,31 @@
-function updateCart(cookies) {
+function updateCart(cookies, userEmail, locationId) {
 
   const output = [];
+
+  let userPhone;
+  let locationPhone;
+
+  // console.log(userEmail);
+
+  $.ajax({
+  method: "GET",
+  url: `/api/users/${userEmail}`
+  })
+  .done((user) => {
+    userPhone = user[0].phone;
+    // console.log(userPhone);
+  });
+
+  $.ajax({
+    method: "GET",
+    url: `/api/location/${locationId}`
+  })
+  .done((location) => {
+    locationPhone = location[0].phone_number;
+    console.log(locationPhone);
+  });
+
+  // console.log(userPhone, locationPhone);
 
   let cookieArr = cookies.split("; ");
 
@@ -16,7 +41,7 @@ function updateCart(cookies) {
     return 0;
   })
 
-  console.log(cookieArrArr)
+  // console.log(cookieArrArr)
 
   const $cart = $("#cart");
 
@@ -30,7 +55,7 @@ function updateCart(cookies) {
     url: `/api/food/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
-      console.log(food);
+      // console.log(food);
       output.push([food[0].name, cookieArrArr[i][1]]);
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
@@ -39,30 +64,6 @@ function updateCart(cookies) {
     })
   }
 
-  setTimeout(function() {
-
-    let dozens = Math.floor(totalQty / 12);
-    let discount = dozens * 5.99;
-
-    if (dozens >= 1) {
-      $cart.append(`<div>Dozen Discount: -- $${discount.toFixed(2)}</div>`);
-    }
-
-    let tax = ((Number(totalPrice - discount) * 0.13));
-
-    $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
-
-    console.log(totalPrice, discount, tax);
-
-    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
-
-  }, 100);
-
   return output;
 
 };
-
-function remove(id) {
-  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-  updateCart(document.cookie);
-}
