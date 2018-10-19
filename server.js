@@ -64,6 +64,10 @@ app.get("/locations/:id", (req, res) => {
   res.render("menu", templateVars);
 });
 
+app.get("/checkout", (req, res) => {
+  res.render("checkout", {currUser: req.session.user});
+});
+
 app.get('/logout', (req, res) => {
 	req.session = null;
 	res.redirect('/');
