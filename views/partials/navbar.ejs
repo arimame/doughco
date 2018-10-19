@@ -1,17 +1,16 @@
 <!-- views/partials/navbar.ejs -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Dough Co.</a>
+  <a class="navbar-brand" href="/">Dough Co.</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       
-      <% console.log(">>>>>>>>>", currUser) %>
       <% if (currUser) { %>
 
-      <a class="nav-item nav-link" href="#">my account</a>
+      <a class="nav-item nav-link" href="/myaccount">my account</a>
       <a class="nav-item nav-link" href="/logout">logout</a>
 
       <% } else { %>

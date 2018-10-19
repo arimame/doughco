@@ -55,7 +55,7 @@ app.get("/locations", (req, res) => {
 });
 
 app.get("/myaccount", (req, res) => {
-  res.render("myaccount");
+  res.render("myaccount", {currUser: req.session.user});
 });
 
 app.get("/locations/:id", (req, res) => {
