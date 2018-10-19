@@ -1,5 +1,6 @@
 function updateCart(cookies) {
 
+  let cartArr = [];
   const output = [];
 
   let cookieArr = cookies.split("; ");
@@ -30,7 +31,7 @@ function updateCart(cookies) {
     url: `/api/food/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
-      console.log(food);
+      cartArr.push(food);
       output.push([food[0].name, cookieArrArr[i][1]]);
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
@@ -54,7 +55,18 @@ function updateCart(cookies) {
 
     console.log(totalPrice, discount, tax);
 
-    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
+    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form id="submit-cart" method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
+
+    $('#submit-cart').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: '/checkout/process',
+        data: {
+          cart: JSON.stringify(cartArr)
+        }
+      })
+    });
 
   }, 100);
 

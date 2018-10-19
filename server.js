@@ -112,6 +112,10 @@ app.get("/checkout", (req, res) => {
 
 });
 
+app.post("/checkout/process", (req, res) => {
+  console.log(req.body);
+})
+
 app.get('/logout', (req, res) => {
 	req.session = null;
 	res.redirect('locations');
