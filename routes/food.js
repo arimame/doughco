@@ -15,6 +15,17 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
     });
+  }),
+
+  router.get("/food/:id", (req, res) => {
+    let food_id = req.params.id;
+    knex
+      .select("*")
+      .from("food")
+      .where("id", food_id)
+      .then((results) => {
+        res.json(results);
+    });
   });
 
   return router;

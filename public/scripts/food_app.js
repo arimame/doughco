@@ -134,6 +134,8 @@ $(() => {
     // }
   });;
 
+  updateCart(document.cookie);
+
 });
 
 function add(id, qtyId) {
@@ -158,26 +160,44 @@ function add(id, qtyId) {
     // console.log(cookieArrArr[i][0]);
     if (i === cookieArrArr.length) {
       document.cookie = `${idStr}=${qty}`
+      updateCart(document.cookie)
     } else if (idStr === cookieArrArr[i][0]) {
       let newCookie = Number(cookieArrArr[i][1]) + Number(qty);
       console.log(newCookie);
       document.cookie = `${idStr}=${newCookie}`
+      updateCart(document.cookie)
       break;
     }
   }
 
-  // for (let arr of cookieArrArr) {
-  //   if (idStr === arr[0]) {
-  //     console.log(newCookie);
-  //   } else {
-  //   }
-  // }
-
-
-
-
-  // console.log(cookieArrArr);
-
-  // console.log(test);
-
 }
+
+function updateCart(cookies) {
+  let cookieArr = cookies.split("; ");
+
+  let cookieArrArr = [];
+  for (let cookie of cookieArr) {
+    cookieArrArr.push(cookie.split("="))
+  }
+
+  const $cart = $("#cart");
+
+  $cart.empty();
+  let totalPrice = 0;
+
+  for (let i = 0; i < cookieArrArr.length; i++) {
+    $.ajax({
+    method: "GET",
+    url: `/api/food/food/${cookieArrArr[i][0]}`
+    })
+     .done((food) => {
+      console.log(food);
+      $cart.append(`
+       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>`);
+      totalPrice += (food[0].price * cookieArrArr[i][1]).toFixed(2);
+  })
+   //   .done($cart.append(`<div>TOTAL: ${totalPrice}</div>`));
+   }
+
+
+};
