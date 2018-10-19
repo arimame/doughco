@@ -194,10 +194,11 @@ function updateCart(cookies) {
       console.log(food);
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>`);
-      totalPrice += (food[0].price * cookieArrArr[i][1]).toFixed(2);
-  })
-   //   .done($cart.append(`<div>TOTAL: ${totalPrice}</div>`));
-   }
+      totalPrice += Number(food[0].price * cookieArrArr[i][1]);
+    })
+  }
+
+  setTimeout(function() {$cart.append(`<div>TOTAL: $${totalPrice.toFixed(2)}</div>`)}, 100);
 
 
 };
