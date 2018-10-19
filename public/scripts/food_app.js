@@ -207,7 +207,7 @@ function updateCart(cookies) {
      .done((food) => {
       console.log(food);
       $cart.append(`
-       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>`);
+       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
       totalPrice += Number(food[0].price * cookieArrArr[i][1]);
       totalQty += Number(cookieArrArr[i][1]);
     })
@@ -233,3 +233,8 @@ function updateCart(cookies) {
   }, 100);
 
 };
+
+function remove(id) {
+  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  updateCart(document.cookie);
+}
