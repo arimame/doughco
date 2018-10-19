@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script>const location_id = "<%= location_id %>";</script>
     <script>const currUser = "<%= currUser %>";</script>
     <script type="text/javascript" src="/scripts/account-details.js"></script>
     <script type="text/javascript" src="/scripts/googlemap.js"></script>
     <script type="text/javascript" src="/scripts/update-cart.js"></script>
-
+    <!-- <script>console.log(currUser);</script> -->
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -29,7 +30,7 @@
      <script>
     $(document).ready(function() {
     $("#pick-time").click(function() {
-    console.log("is this working?")
+    // console.log("is this working?")
     $("#time").slideToggle();
     })
   });
@@ -104,7 +105,7 @@
 
 
   <script>
-    const cart = updateCart(document.cookie);
+    const cart = updateCart(document.cookie, currUser, location_id);
   </script>
  </body>
 

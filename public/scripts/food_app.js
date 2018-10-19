@@ -237,7 +237,7 @@ function updateCart(cookies) {
 
     // console.log(totalPrice, discount, tax);
 
-    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
+    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout/${location_id}"><input type="submit" value="Checkout"></form>`)
 
   }, 100);
 

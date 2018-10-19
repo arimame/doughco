@@ -1,7 +1,32 @@
-function updateCart(cookies) {
+function updateCart(cookies, userEmail, locationId) {
 
   let cartArr = [];
   const output = [];
+
+  let userPhone;
+  let locationPhone;
+
+  // console.log(userEmail);
+
+  $.ajax({
+  method: "GET",
+  url: `/api/users/${userEmail}`
+  })
+  .done((user) => {
+    userPhone = user[0].phone;
+    // console.log(userPhone);
+  });
+
+  $.ajax({
+    method: "GET",
+    url: `/api/location/${locationId}`
+  })
+  .done((location) => {
+    locationPhone = location[0].phone_number;
+    console.log(locationPhone);
+  });
+
+  // console.log(userPhone, locationPhone);
 
   let cookieArr = cookies.split("; ");
 
@@ -17,7 +42,7 @@ function updateCart(cookies) {
     return 0;
   })
 
-  console.log(cookieArrArr)
+  // console.log(cookieArrArr)
 
   const $cart = $("#cart");
 
@@ -73,8 +98,3 @@ function updateCart(cookies) {
   return output;
 
 };
-
-function remove(id) {
-  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-  updateCart(document.cookie);
-}
