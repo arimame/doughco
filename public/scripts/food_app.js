@@ -1,5 +1,5 @@
 $(() => {
-  console.log(foo);
+  // console.log(foo);
   $.ajax({
     method: "GET",
     url: `/api/food/${foo}`
@@ -86,7 +86,7 @@ $(() => {
         </div>
       `);
     }
-    console.log(i);
+    // console.log(i);
     if (i === foods.length - 1) {
       $(".container").append(`
         <div class="row">
@@ -159,7 +159,7 @@ function add(id, qtyId) {
   // console.log(idStr, qty);
 
   let cookies = document.cookie;
-  console.log(cookies);
+  // console.log(cookies);
   let cookieArr = cookies.split("; ");
   // console.log(cookieArr);
   let cookieArrArr = [];
@@ -172,12 +172,12 @@ function add(id, qtyId) {
     // console.log(idStr === cookieArrArr[i][0]);
     // console.log(cookieArrArr[i][0]);
     if (i === cookieArrArr.length) {
-      document.cookie = `${idStr}=${qty}`
+      document.cookie = `${idStr}=${qty};path=/`
       updateCart(document.cookie)
     } else if (idStr === cookieArrArr[i][0]) {
       let newCookie = Number(cookieArrArr[i][1]) + Number(qty);
-      console.log(newCookie);
-      document.cookie = `${idStr}=${newCookie}`
+      // console.log(newCookie);
+      document.cookie = `${idStr}=${newCookie};path=/`
       updateCart(document.cookie)
       break;
     }
@@ -200,7 +200,7 @@ function updateCart(cookies) {
     return 0;
   })
 
-  console.log(cookieArrArr)
+  // console.log(cookieArrArr)
 
   const $cart = $("#cart");
 
@@ -214,7 +214,7 @@ function updateCart(cookies) {
     url: `/api/food/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
-      console.log(food);
+      // console.log(food);
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
       totalPrice += Number(food[0].price * cookieArrArr[i][1]);
@@ -235,9 +235,9 @@ function updateCart(cookies) {
 
     $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
 
-    console.log(totalPrice, discount, tax);
+    // console.log(totalPrice, discount, tax);
 
-    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div>`)
+    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
 
   }, 100);
 

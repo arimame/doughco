@@ -13,6 +13,8 @@
     <script>const currUser = "<%= currUser %>";</script>
     <script type="text/javascript" src="/scripts/account-details.js"></script>
     <script type="text/javascript" src="/scripts/googlemap.js"></script>
+    <script type="text/javascript" src="/scripts/update-cart.js"></script>
+
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -90,7 +92,7 @@
         </div>
       </div>
     <!-- sidebar -->
-    <div class="col-sm-4 sidebar">
+    <div id="cart" class="col-sm-4 sidebar">
       sidebar
     </div>
   </div>
@@ -101,7 +103,9 @@
 
 
 
-
+  <script>
+    const cart = updateCart(document.cookie);
+  </script>
  </body>
 
 </html>
