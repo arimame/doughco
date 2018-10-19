@@ -184,6 +184,7 @@ function updateCart(cookies) {
 
   $cart.empty();
   let totalPrice = 0;
+  let totalQty = 0;
 
   for (let i = 0; i < cookieArrArr.length; i++) {
     $.ajax({
@@ -195,10 +196,27 @@ function updateCart(cookies) {
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>`);
       totalPrice += Number(food[0].price * cookieArrArr[i][1]);
+      totalQty += Number(cookieArrArr[i][1]);
     })
   }
 
-  setTimeout(function() {$cart.append(`<div>TOTAL: $${totalPrice.toFixed(2)}</div>`)}, 100);
+  setTimeout(function() {
 
+    let dozens = Math.floor(totalQty / 12);
+    let discount = dozens * 5.99;
+
+    if (dozens >= 1) {
+      $cart.append(`<div>Dozen Discount: -- $${discount.toFixed(2)}</div>`);
+    }
+
+    let tax = ((Number(totalPrice - discount) * 0.13));
+
+    $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
+
+    console.log(totalPrice, discount, tax);
+
+    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div>`)
+
+  }, 100);
 
 };
