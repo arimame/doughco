@@ -33,9 +33,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i].id}')">-</span>
+                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -71,9 +71,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i+1].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i+1].id}')">-</span>
+                      <input type="text" id="donut-qty-${foods[i+1].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i+1].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -114,9 +114,9 @@ $(() => {
               <form>
                 <div class="col-lg-4">
                   <div class="qty mt-5">
-                    <span class="minus bg-dark">-</span>
-                      <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="3">
-                    <span class="plus bg-dark">+</span>
+                    <span class="minus bg-dark" onclick="minus('donut-qty-${foods[i].id}')">-</span>
+                    <input type="text" id="donut-qty-${foods[i].id}" class="count" name="qty" value="1">
+                    <span class="plus bg-dark" onclick="plus('donut-qty-${foods[i].id}')">+</span>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -137,6 +137,19 @@ $(() => {
   updateCart(document.cookie);
 
 });
+
+function minus(id) {
+  const $val = $('#'+id);
+  $val.val(parseInt($val.val()) - 1 )
+  if ($val.val() == 0) {
+    $val.val(1);
+  };
+}
+
+function plus(id) {
+  const $val = $('#'+id);
+  $val.val(parseInt($val.val()) + 1 )
+}
 
 function add(id, qtyId) {
 
