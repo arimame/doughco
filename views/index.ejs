@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script>const currUser = "<%= currUser %>";</script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/location_app.js"></script>
 
 
     <!-- bootstrap -->
@@ -34,14 +35,18 @@
     <div class="container">
     <h1 class="display-4 main-heading">Doughnuts anytime</h1>
     <p class="lead subheading">Doughnuts anywhere.</p>
-    <div class="dropdown">
+    <form method="GET" action="/locations/1">
+      <select id="select_loc" name="locations">
+      </select>
+    </form>
+<!--     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Choose location
       </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="#">Location 1</a>
       <a class="dropdown-item" href="#">Location 2</a>
-  </div>
+  </div> -->
 </div>
     </div>
     </div>

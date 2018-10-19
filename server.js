@@ -17,6 +17,7 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const foodRoutes = require("./routes/food");
+const locationRoutes = require("./routes/location");
 
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
@@ -44,6 +45,7 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/food", foodRoutes(knex));
+app.use("/api/location", locationRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
