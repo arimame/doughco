@@ -157,7 +157,7 @@ function add(id, qtyId) {
   let qty = $('#'+qtyId).val();
 
 
-  if (!(isNaN(parseFloat(qty)))) {
+  if (!(isNaN(parseFloat(qty))) && (parseFloat(qty)) > 0) {
 
   // console.log(idStr, qty);
 
