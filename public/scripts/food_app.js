@@ -11,8 +11,9 @@ $(() => {
         <div class="row">
           <article class="col-md-6">
             <div class="row">
-              <div class="col-md-12" align="center">
+              <div class="col-md-12 img-container" align="center">
                 <img src=${foods[i].image_url}>
+                <div class="description">${foods[i].description}</div>
               </div>
             </div>
 
@@ -46,8 +47,9 @@ $(() => {
           <article class="col-md-6">
 
             <div class="row">
-              <div class="col-md-12" align="center">
+              <div class="col-md-12 img-container" align="center">
                 <img src=${foods[i+1].image_url}>
+                <div class="description">${foods[i+1].description}</div>
               </div>
             </div>
 
@@ -87,8 +89,9 @@ $(() => {
           <article class="col-md-6">
 
             <div class="row">
-              <div class="col-md-12" align="center">
+              <div class="col-md-12 img-container" align="center">
                 <img src=${foods[i].image_url}>
+                <div class="description">${foods[i].description}</div>
               </div>
             </div>
 
