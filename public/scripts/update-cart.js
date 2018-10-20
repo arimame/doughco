@@ -8,15 +8,13 @@ function updateCart(cookies, userEmail, locationId) {
   let userPhone;
   let locationPhone;
 
-  // console.log(userEmail);
-
   $.ajax({
   method: "GET",
   url: `/api/users/${userEmail}`
   })
   .done((user) => {
     userPhone = user[0].phone;
-    // console.log(userPhone);
+    console.log(userPhone);
   });
 
   $.ajax({
@@ -90,9 +88,12 @@ function updateCart(cookies, userEmail, locationId) {
         method: 'POST',
         url: '/checkout/process',
         data: {
-          cart: JSON.stringify(cartArr)
+          cart: JSON.stringify(cartArr),
+          clientPhone: userPhone,
+          clientEmail: userEmail,
+          storePhone: locationPhone
         }
-      })
+      }).done(window.location.href = '/order/purgatory/12047208938'); // change to clientPhone
     });
 
   }, 100);
