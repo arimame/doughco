@@ -86,6 +86,7 @@ app.post('/sms', (req, res) => {
 });
 
 
+
 app.post("/test", (req, res) => {
   client.messages
   .create({
@@ -105,6 +106,7 @@ app.post("/checkout/process", (req, res) => {
   const storePhone = req.body.storePhone;
 
   let body = `New order from ${clientEmail}:\n`;
+
 
   for (let item of cart) {
     body += `${item[0].name}, quantity: 1\n`
