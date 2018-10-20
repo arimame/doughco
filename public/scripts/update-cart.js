@@ -1,6 +1,3 @@
-const output = [];
-
-
 function updateCart(cookies, userEmail, locationId) {
 
   let cartArr = [];
@@ -14,7 +11,7 @@ function updateCart(cookies, userEmail, locationId) {
   })
   .done((user) => {
     userPhone = user[0].phone;
-    console.log(userPhone);
+    // console.log(userPhone);
   });
 
   $.ajax({
@@ -23,7 +20,7 @@ function updateCart(cookies, userEmail, locationId) {
   })
   .done((location) => {
     locationPhone = location[0].phone_number;
-    console.log(locationPhone);
+    // console.log(locationPhone);
   });
 
   // console.log(userPhone, locationPhone);
@@ -56,14 +53,16 @@ function updateCart(cookies, userEmail, locationId) {
     url: `/api/food/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
-      cartArr.push(food);
-      output.push([food[0].name, cookieArrArr[i][1]]);
+      cartArr.push({name: food[0].name, quantity: cookieArrArr[i][1]});
+      // output.push([food[0].name, cookieArrArr[i][1]]);
       $cart.append(`
        <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
       totalPrice += Number(food[0].price * cookieArrArr[i][1]);
       totalQty += Number(cookieArrArr[i][1]);
     })
   }
+
+  console.log(cartArr);
 
   setTimeout(function() {
 
@@ -78,7 +77,7 @@ function updateCart(cookies, userEmail, locationId) {
 
     $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
 
-    console.log(totalPrice, discount, tax);
+    // console.log(totalPrice, discount, tax);
 
     $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form id="submit-cart" method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
 
@@ -101,4 +100,3 @@ function updateCart(cookies, userEmail, locationId) {
 
 };
 
-console.log(output);

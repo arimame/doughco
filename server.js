@@ -52,9 +52,9 @@ app.use("/api/food", foodRoutes(knex));
 app.use("/api/location", locationRoutes(knex));
 
 // Twilio
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_AUTH;
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = process.env.TWILIO_SID;
+// const authToken = process.env.TWILIO_AUTH;
+// const client = require('twilio')(accountSid, authToken);
 
 // Home page
 app.get("/", (req, res) => {
@@ -151,7 +151,7 @@ app.get('/order-confirmed/:clientPhone', (req, res) => {
    })
   .then(message => console.log(message.sid))
   .done();
-  
+
   res.render('order-confirmed', {currUser: req.session.user});
 
 })
