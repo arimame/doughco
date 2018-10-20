@@ -80,25 +80,11 @@ app.get("/checkout/:id", (req, res) => {
 });
 
 app.post('/sms', (req, res) => {
-  res.set('Content-Type', '/text/html')
-  order.update(1);
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  const time = req.body['Body'];
+  order.update(1, time);
   res.end();
 });
-
-
-
-app.post("/test", (req, res) => {
-  client.messages
-  .create({
-     body: 'IT WORKED',
-     from: '+16474944728',
-     mediaUrl: 'https://thumbs.gfycat.com/InsecureHandmadeArcticwolf-size_restricted.gif',
-     to: '+12047208938'
-   })
-  .then(message => console.log(message.sid))
-  .done();
-});
-
 
 app.post("/checkout/process", (req, res) => {
   const cart = JSON.parse(req.body.cart);
@@ -147,18 +133,18 @@ app.get('/order/purgatory/:clientPhone', (req, res) => {
 
 app.get('/order-confirmed/:clientPhone', (req, res) => {
   const clientPhone = req.params.clientPhone;
-  const body = 'Order confirmed. Please go to restaurant';
+
+  const body = `Order confirmed. Your doughnuts will be ready in ${order.time} minutes!`;
   client.messages
   .create({
-     body: body,
-     from: '+16474944728',
-     to: clientPhone // change to storePhone
-   })
+    body: body,
+    from: '+16474944728',
+    to: clientPhone
+  })
   .then(message => console.log(message.sid))
   .done();
 
   res.render('order-confirmed', {currUser: req.session.user});
-
 })
 
 app.get('/logout', (req, res) => {
