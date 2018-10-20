@@ -46,7 +46,16 @@ function updateCart(cookies, userEmail, locationId) {
   $cart.empty();
   let totalPrice = 0;
   let totalQty = 0;
+  $cart.append(
+  `<p class="cartheading"> Your order summary <p>
+    <div class="row">
+      <div class="col-lg-2" align="center"><p>qty</p></div>
+      <div class="col-lg-5" align="center"><p>item</p></div>
+      <div class="col-lg-3" align="center"><p>price</p></div>
+      <div class="col-lg-2" align="center"><p></p></div>
+    </div>
 
+  `);
   for (let i = 0; i < cookieArrArr.length; i++) {
     $.ajax({
     method: "GET",
@@ -56,7 +65,16 @@ function updateCart(cookies, userEmail, locationId) {
       cartArr.push({name: food[0].name, quantity: cookieArrArr[i][1]});
       // output.push([food[0].name, cookieArrArr[i][1]]);
       $cart.append(`
-       <div>${cookieArrArr[i][1]} : ${food[0].name} -- $${(food[0].price * cookieArrArr[i][1]).toFixed(2)} <button onclick="remove(${cookieArrArr[i][0]})">Remove</button></div>`);
+
+        <div class="row">
+          <div class="col-lg-2" align="center">${cookieArrArr[i][1]}</div>
+          <div class="col-lg-5" align="center">${food[0].name}</div>
+          <div class="col-lg-3" align="center">$${(food[0].price * cookieArrArr[i][1]).toFixed(2)}</div>
+          <div class="col-lg-2" align="center"><i class="material-icons" onclick="remove(${cookieArrArr[i][0]})">
+delete_forever
+</i></div></div>`);
+
+
       totalPrice += Number(food[0].price * cookieArrArr[i][1]);
       totalQty += Number(cookieArrArr[i][1]);
     })
@@ -70,16 +88,16 @@ function updateCart(cookies, userEmail, locationId) {
     let discount = dozens * 5.99;
 
     if (dozens >= 1) {
-      $cart.append(`<div>Dozen Discount: -- $${discount.toFixed(2)}</div>`);
+      $cart.append(`<div class="totalcart"><i>Dozen Discount: -$${discount.toFixed(2)}</i></div>`);
     }
 
     let tax = ((Number(totalPrice - discount) * 0.13));
 
-    $cart.append(`<div>Tax -- $${tax.toFixed(2)}</div>`)
+    $cart.append(`<div class="totalcart"><i>Tax: $${tax.toFixed(2)}</i></div>`)
 
     // console.log(totalPrice, discount, tax);
 
-    $cart.append(`<div>TOTAL -- $${(totalPrice - discount + tax).toFixed(2)}</div><form id="submit-cart" method="GET" action="/checkout"><input type="submit" value="Checkout"></form>`)
+    $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form  id="submit-cart" method="GET" action="/checkout" align="center"><input class="btn btn-primary" type="submit" value="Checkout"></form>`)
 
     $('#submit-cart').submit(function(e) {
       e.preventDefault();

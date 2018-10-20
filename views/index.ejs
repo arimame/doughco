@@ -29,7 +29,9 @@
      <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
 
     <script> function test() {console.log($("#select_loc").val())}; </script>
 
@@ -40,29 +42,21 @@
 
     <div class="jumbotron jumbotron-fluid">
     <div class="container">
-    <h1 class="display-4 main-heading">Doughnuts anytime</h1>
-    <p class="lead subheading">Doughnuts anywhere.</p>
+    <h1 class="display-4 main-heading">Doughnuts now.</h1>
+    <p class="lead subheading">Select your location:</p>
     <form id="loc_submit" method="GET" action="/locations">
       <select id="select_loc" name="locations">
       </select>
-      <button id="loc_button">Select</button>
+      <button id="loc_button" class="btn btn-primary">Order</button>
     </form>
-<!--     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Choose location
-      </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Location 1</a>
-      <a class="dropdown-item" href="#">Location 2</a>
-  </div> -->
-</div>
+    </div>
     </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col-8"><p>Tart gummi bears pie pastry. Liquorice carrot cake ice cream candy bonbon tiramisu icing lemon drops bear claw. Cake cookie jelly beans. Pudding gummi bears chocolate cake pudding sugar plum cheesecake donut bonbon bear claw.</p></div>
-        <div class="col-4"><p>Yum donuts</p></div>
+        <div class="col-8"><p id="mission" class="center"><span id="logo"> Dough Co.</span> makes delicious fresh doughnuts on order! Place your order now and receive a confirmation text from Dough Co. letting you know when your order will be ready for pick up. Dough Co. is a convenient way to order doughnuts on the go! Go Dough Co.!</p></div>
+        <div class="col-4 main-heading"><p class="center">Now with two locations!</p></div>
       </div>
     </div>
 
