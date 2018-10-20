@@ -92,7 +92,7 @@ function updateCart(cookies, userEmail, locationId) {
           clientEmail: userEmail,
           storePhone: locationPhone
         }
-      }).done(window.location.href = '/order/purgatory/12047208938'); // change to clientPhone
+      }).done(window.location.href = '/order/purgatory/' + userPhone); // change to clientPhone
     });
 
   }, 100);

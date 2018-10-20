@@ -52,9 +52,9 @@ app.use("/api/food", foodRoutes(knex));
 app.use("/api/location", locationRoutes(knex));
 
 // Twilio
-// const accountSid = process.env.TWILIO_SID;
-// const authToken = process.env.TWILIO_AUTH;
-// const client = require('twilio')(accountSid, authToken);
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AUTH;
+const client = require('twilio')(accountSid, authToken);
 
 // Home page
 app.get("/", (req, res) => {
@@ -109,7 +109,7 @@ app.post("/checkout/process", (req, res) => {
 
 
   for (let item of cart) {
-    body += `${item[0].name}, quantity: 1\n`
+    body += `${item.name}, quantity: ${item.quantity}\n`
   }
 
   client.messages
@@ -124,6 +124,8 @@ app.post("/checkout/process", (req, res) => {
 })
 
 app.get('/check-status', sseExpress(), function(req, res) {
+  req.socket.setKeepAlive();
+  console.log('checking status..........');
   function check() {
     if (order.status === 1) {
       res.sse({
