@@ -52,9 +52,9 @@ app.use("/api/food", foodRoutes(knex));
 app.use("/api/location", locationRoutes(knex));
 
 // Twilio
-// const accountSid = process.env.TWILIO_SID;
-// const authToken = process.env.TWILIO_AUTH;
-// const client = require('twilio')(accountSid, authToken);
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AUTH;
+const client = require('twilio')(accountSid, authToken);
 
 // Home page
 app.get("/", (req, res) => {
@@ -80,23 +80,9 @@ app.get("/checkout/:id", (req, res) => {
 });
 
 app.post('/sms', (req, res) => {
+  res.set('Content-Type', '/text/html')
   order.update(1);
   res.end();
-});
-
-app.get('/sms', sseExpress(), function(req, res) {
-  function check() {
-    if (order.status === 1) {
-      res.sse({
-        event: 'received',
-        data: { welcomeMsg: 'Got a text back' }
-      });
-      order.update(0);
-      return;
-    }
-    setTimeout(check, 5000);
-  }
-  check();
 });
 
 app.post("/test", (req, res) => {
@@ -113,7 +99,61 @@ app.post("/test", (req, res) => {
 
 
 app.post("/checkout/process", (req, res) => {
-  console.log(req.body);
+  const cart = JSON.parse(req.body.cart);
+  const clientEmail = req.body.clientEmail;
+  const storePhone = req.body.storePhone;
+
+  let body = `New order from ${clientEmail}:\n`;
+
+  for (let item of cart) {
+    body += `${item[0].name}, quantity: 1\n`
+  }
+
+  client.messages
+  .create({
+     body: body,
+     from: '+16474944728',
+     to: '+12047208938' // change to storePhone
+   })
+  .then(message => console.log(message.sid))
+  .done();
+
+})
+
+app.get('/check-status', sseExpress(), function(req, res) {
+  function check() {
+    if (order.status === 1) {
+      res.sse({
+        event: 'received',
+        data: { welcomeMsg: 'Order confirmed' }
+      });
+      order.update(0);
+      return;
+    }
+    setTimeout(check, 5000);
+  }
+  check();
+});
+
+app.get('/order/purgatory/:clientPhone', (req, res) => {
+  res.render('order-purgatory', {clientPhone: req.params.clientPhone,
+                                currUser: req.session.user});
+});
+
+app.get('/order-confirmed/:clientPhone', (req, res) => {
+  const clientPhone = req.params.clientPhone;
+  const body = 'Order confirmed. Please go to restaurant';
+  client.messages
+  .create({
+     body: body,
+     from: '+16474944728',
+     to: clientPhone // change to storePhone
+   })
+  .then(message => console.log(message.sid))
+  .done();
+  
+  res.render('order-confirmed', {currUser: req.session.user});
+
 })
 
 app.get('/logout', (req, res) => {
