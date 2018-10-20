@@ -100,3 +100,8 @@ function updateCart(cookies, userEmail, locationId) {
 
 };
 
+function remove(id) {
+  console.log(id);
+  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  updateCart(document.cookie);
+}
