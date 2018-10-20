@@ -9,7 +9,6 @@ $(() => {
       //$(".container").append(`<div>${foods[i].name}</div>`);
       $("#menu").append(`
         <div class="row">
-
           <article class="col-md-6">
             <div class="row">
               <div class="col-md-12" align="center">
@@ -38,7 +37,7 @@ $(() => {
                   </div>
                 </div>
                 <div class="col-md-12" align="center">
-                  <button class="toCart" onclick="add(${foods[i].id}, 'donut-qty-${foods[i].id}')" type="button"> Add to cart </button>
+                  <button class="toCart btn btn-primary" onclick="add(${foods[i].id}, 'donut-qty-${foods[i].id}')" type="button"> Add to cart </button>
                 </div>
             </div>
           </article>
@@ -73,7 +72,7 @@ $(() => {
                   </div>
                 </div>
                 <div class="col-md-12" align="center">
-                  <button class="toCart" onclick="add(${foods[i+1].id}, 'donut-qty-${foods[i+1].id}')" type="button"> Add to cart </button>
+                  <button class="toCart btn-primary" onclick="add(${foods[i+1].id}, 'donut-qty-${foods[i+1].id}')" type="button"> Add to cart </button>
                 </div>
             </div>
 
@@ -114,7 +113,7 @@ $(() => {
                   </div>
                 </div>
                 <div class="col-md-12" align="center">
-                  <button class="toCart" onclick="add(${foods[i].id}, 'donut-qty-${foods[i].id}')" type="button"> Add to cart </button>
+                  <button class="toCart btn-primary" onclick="add(${foods[i].id}, 'donut-qty-${foods[i].id}')" type="button"> Add to cart </button>
                 </div>
             </div>
           </article>

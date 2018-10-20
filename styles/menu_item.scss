@@ -3,7 +3,7 @@
 #menu {
   width: 20em;
   /*background: pink;*/
-  border: 2px solid;
+  border: 2px solid #861657;
   padding: 1em;
 
   /*article {
@@ -27,7 +27,7 @@
   .price {
 
     display: inline;
-    font-family: 'Arbutus Slab', serif;
+    font-family: 'Chivo', sans-serif;
     font-size: .75em;
 
   }
@@ -44,7 +44,10 @@
 }
 
 #cart {
-  border: 1px black solid;
+
+  background-color: #ffa69e;
+  font-family: 'Arbutus Slab', serif;
+
 }
 
 /*button counter*/
@@ -60,6 +63,13 @@ button {
   border-radius: 5px;
 
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #aa4465!important;
+    border-color: #861657!important;
+}
+
+
 .qty .count {
     color: #000;
     display: inline-block;
