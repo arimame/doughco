@@ -1,7 +1,9 @@
+const output = [];
+
+
 function updateCart(cookies, userEmail, locationId) {
 
   let cartArr = [];
-  const output = [];
 
   let userPhone;
   let locationPhone;
@@ -95,6 +97,7 @@ function updateCart(cookies, userEmail, locationId) {
 
   }, 100);
 
-  return output;
 
 };
+
+console.log(output);
