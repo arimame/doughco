@@ -1,14 +1,9 @@
-
-
 #menu {
   width: 20em;
-  /*background: pink;*/
-  border: 2px solid #861657;
+  /*border: 2px solid #861657;*/
   padding: 1em;
 
-  /*article {
-    border: 1px black solid;
-  }*/
+
 
   .menu_title {
     font-family: 'Arbutus Slab', serif;
@@ -28,14 +23,11 @@
 
     display: inline;
     font-family: 'Chivo', sans-serif;
-    font-size: .75em;
+    font-size: 1em;
 
   }
 
-  form {
-    display: inline;
-    border: 1px black solid;
-  }
+
 
   .col-md-6 {
     margin-bottom: 30px;
@@ -43,10 +35,49 @@
 
 }
 
+
 #cart {
 
   background-color: #ffa69e;
   font-family: 'Arbutus Slab', serif;
+   box-shadow: 3px 3px 5px 6px #ccc;
+
+
+  .row {
+    margin-bottom: 30px;
+ /*   border: 2px #861657 solid;*/
+
+    }
+
+  .cartheading {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    margin-bottom: 30px;
+
+  }
+
+  .totalcart {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .finaltotal {
+    margin-top: 20px;
+  }
+
+
+
+  .col-lg {
+    text-align: center;
+  }
+
+  .material-icons {
+    cursor: pointer;
+
+  }
+
+
 
 }
 
@@ -55,18 +86,17 @@
 .qty {
 width: 150px;
 
-
 }
 
-button {
-  width: 150px;
-  border-radius: 5px;
-
-}
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #aa4465!important;
     border-color: #861657!important;
+    width: 150px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-family: 'Arbutus Slab', serif;
+
 }
 
 
@@ -81,7 +111,10 @@ button {
     min-width: 35px;
     text-align: center;
     width:25%;
+    user-select: none;
+
 }
+
 .qty .plus {
     cursor: pointer;
     display: inline-block;
@@ -92,6 +125,8 @@ button {
     font: 30px/1 Arial,sans-serif;
     text-align: center;
     border-radius: 50%;
+    user-select: none;
+
     }
 .qty .minus {
     cursor: pointer;
@@ -104,6 +139,7 @@ button {
     text-align: center;
     border-radius: 50%;
     background-clip: padding-box;
+    user-select: none;
 }
 
 
