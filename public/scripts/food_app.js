@@ -188,6 +188,8 @@ function add(id, qtyId) {
 
 }
 
+$('#'+qtyId).val(1);
+
 }
 
 function updateCart(cookies) {
