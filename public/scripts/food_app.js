@@ -156,6 +156,9 @@ function add(id, qtyId) {
   let idStr = String(id)
   let qty = $('#'+qtyId).val();
 
+
+  if (!(isNaN(parseFloat(qty)))) {
+
   // console.log(idStr, qty);
 
   let cookies = document.cookie;
@@ -182,6 +185,8 @@ function add(id, qtyId) {
       break;
     }
   }
+
+}
 
 }
 
@@ -244,6 +249,7 @@ function updateCart(cookies) {
 };
 
 function remove(id) {
-  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  console.log(id);
+  document.cookie = `${id}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   updateCart(document.cookie);
 }
