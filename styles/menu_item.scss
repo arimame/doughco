@@ -14,7 +14,10 @@
 
   img {
     width: 65%;
+  }
 
+  img:hover {
+    opacity: 0.1;
   }
 
   .price {
@@ -27,6 +30,25 @@
 
   .col-md-6 {
     margin-bottom: 30px;
+  }
+
+  .img-container {
+    position: relative;
+
+    .description {
+      font-family: 'Chivo', sans-serif;
+      font-size: 1em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .description:hover {
+      opacity: 1;
+    }
+
   }
 
 }
