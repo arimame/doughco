@@ -41,12 +41,12 @@ module.exports = (knex) => {
   });
 
   router.post("/update/cc/:email", (req, res ) => {
-    let {card_number, card_security, card_expire} = req.body || undefined;
+    let {name, card_number, card_security, card_expire} = req.body || undefined;
     knex('users')
     .where({email: req.params.email})
     .update({
       // is Number needed??
-      card_number: Number(card_number), card_security: Number(card_security), card_expire: Number(card_expire)
+      name: name, card_number: Number(card_number), card_security: Number(card_security), card_expire: Number(card_expire)
     }).then((results) => {
       console.log(`\nUpdated card information for ${req.params.email}. Fancy.\n`);
       res.redirect('/');
