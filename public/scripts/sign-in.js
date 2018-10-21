@@ -9,9 +9,8 @@ $(() => {
   			password: $('#password').val()
   		}
   	}).then(function(r) {
-      window.location.href = "/"
-      // refactor
-    })
+      window.location.href = "/";
+    });
   });
 
 });

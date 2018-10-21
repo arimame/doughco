@@ -257,7 +257,7 @@ delete_forever
 
     $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form align="center" method="GET" action="/checkout/${location_id}"><input class="btn btn-primary" type="submit" value="Checkout"></form>`)
 
-  }, 100);
+  }, 150);
 
 };
 
