@@ -5,6 +5,7 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
+  // select all locations
   router.get("/", (req, res) => {
     knex
       .select("*")
@@ -14,6 +15,7 @@ module.exports = (knex) => {
     });
   }),
 
+  // select all locations with 'id'
   router.get("/:id", (req, res) => {
     knex("location")
     .where({id: req.params.id})
