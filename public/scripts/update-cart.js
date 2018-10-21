@@ -97,7 +97,7 @@ delete_forever
 
     // console.log(totalPrice, discount, tax);
 
-    $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form  id="submit-cart" method="GET" action="/checkout" align="center"><input class="btn btn-primary" type="submit" value="Checkout"></form>`)
+    $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form  id="submit-cart" method="GET" action="/checkout" align="center"><input class="btn btn-primary" type="submit" value="Place Order"></form>`)
 
     $('#submit-cart').submit(function(e) {
       e.preventDefault();
