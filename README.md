@@ -1,14 +1,36 @@
-# Node Skeleton
+# Dough Co. -  Food Pick-up Ordering App
 
-## Project Setup
+## About
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+Dough Co. is a food ordering app for a fictitious donut shop with two locations. Users can visit the website, select one or more donuts from a location, and place an order for pick-up. 
+
+When an order is placed the donut shop receives the order via SMS. The restaurant can then specify how long it will take to fulfill it. Once they provide this information, the website updates for the client, and also notifies them via SMS.
+
+This app uses Twilio to implement SMS communication from the website to both the client and restaurant.
+
+## Final Project
+
+
+
+## Dependencies
+
+- node
+- npm
+- bcrypt
+- body-parser
+- cookie-parser
+- cookie-session
+- dotenv
+- ejs
+- express
+- knex
+- knex-logger
+- morgan
+- node-sass-middleware
+- sass
+- pg
+- sse-express
+- twilio
 
 ## Getting Started
 
@@ -22,8 +44,3 @@
   - Check the seeds file to see what gets seeded in the DB
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
-
-## Dependencies
-
-- Node 5.10.x or above
-- NPM 3.8.x or above
