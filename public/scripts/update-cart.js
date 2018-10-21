@@ -59,7 +59,7 @@ function updateCart(cookies, userEmail, locationId) {
   for (let i = 0; i < cookieArrArr.length; i++) {
     $.ajax({
     method: "GET",
-    url: `/api/food/food/${cookieArrArr[i][0]}`
+    url: `/api/food/${cookieArrArr[i][0]}`
     })
      .done((food) => {
       cartArr.push({name: food[0].name, quantity: cookieArrArr[i][1]});
