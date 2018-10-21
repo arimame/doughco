@@ -152,7 +152,6 @@ function updateCart(cookieStr) {
     </div>
   `);
 
-  console.log(cookieStr.length);
   if (cookieStr.length !== 0) {
 
     // display each donut which has a cookie in the cart, with its quantity and price
