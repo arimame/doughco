@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="218px" height="218px" viewBox="0 0 218 218" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>happy-face@0.5x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-612.000000, -176.000000)">
+            <g id="happy-face" transform="translate(616.000000, 180.000000)">
+                <circle id="Oval" stroke="#F6A9BD" stroke-width="7" cx="105" cy="105" r="105"></circle>
+                <g id="Face" transform="translate(53.000000, 48.000000)" stroke="#86DBD4" stroke-width="5">
+                    <circle id="Eye-Left" cx="20.5" cy="20.5" r="20.5"></circle>
+                    <circle id="Eye-Right" cx="83.5" cy="20.5" r="20.5"></circle>
+                    <path d="M51,115 C69.2253967,115 84,100.225397 84,82 L18,82 C18,100.225397 32.7746033,115 51,115 Z" id="Mouth"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
