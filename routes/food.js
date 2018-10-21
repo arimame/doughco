@@ -5,7 +5,7 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  router.get("/:id", (req, res) => {
+  router.get("/location/:id", (req, res) => {
     let loc = req.params.id;
     knex
       .select("*")
@@ -17,7 +17,7 @@ module.exports = (knex) => {
     });
   }),
 
-  router.get("/food/:id", (req, res) => {
+  router.get("/:id", (req, res) => {
     let food_id = req.params.id;
     knex
       .select("*")
