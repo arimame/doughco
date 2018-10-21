@@ -152,42 +152,45 @@ function updateCart(cookieStr) {
     </div>
   `);
 
-  // display each donut which has a cookie in the cart, with its quantity and price
-  for (let i = 0; i < cookieArr.length; i++) {
-    $.ajax({
-    method: "GET",
-    url: `/api/food/${cookieArr[i][0]}`
-    })
-    .done((food) => {
-      $cart.append(`
-        <div class="row">
-          <div class="col-lg-2" align="center">${cookieArr[i][1]}</div>
-          <div class="col-lg-5" align="center">${food[0].name}</div>
-          <div class="col-lg-3" align="center">$${(food[0].price * cookieArr[i][1]).toFixed(2)}</div>
-          <div class="col-lg-2" align="center"><i class="material-icons" onclick="removeCookie(${cookieArr[i][0]})">delete_forever</i></div>
-        </div>`);
-      totalPrice += Number(food[0].price * cookieArr[i][1]);
-      totalQty += Number(cookieArr[i][1]);
-    });
-  }
+  console.log(cookieStr.length);
+  if (cookieStr.length !== 0) {
 
-  // displays total information, after the individual donut information has been retrieved by the database
-  setTimeout(function() {
-    let dozens = Math.floor(totalQty / 12);
-    let discount = dozens * 5.99;
-
-    // adds discount for each dozen purchased
-    if (dozens >= 1) {
-      $cart.append(`<div class = "totalcart"><i>Dozen Discount: -$${discount.toFixed(2)}</i></div>`);
+    // display each donut which has a cookie in the cart, with its quantity and price
+    for (let i = 0; i < cookieArr.length; i++) {
+      $.ajax({
+      method: "GET",
+      url: `/api/food/${cookieArr[i][0]}`
+      })
+      .done((food) => {
+        $cart.append(`
+          <div class="row">
+            <div class="col-lg-2" align="center">${cookieArr[i][1]}</div>
+            <div class="col-lg-5" align="center">${food[0].name}</div>
+            <div class="col-lg-3" align="center">$${(food[0].price * cookieArr[i][1]).toFixed(2)}</div>
+            <div class="col-lg-2" align="center"><i class="material-icons" onclick="removeCookie(${cookieArr[i][0]})">delete_forever</i></div>
+          </div>`);
+        totalPrice += Number(food[0].price * cookieArr[i][1]);
+        totalQty += Number(cookieArr[i][1]);
+      });
     }
 
-    // displays taxes, total price, and checkout button
-    let tax = ((Number(totalPrice - discount) * 0.13));
-    $cart.append(`<div class = "totalcart"><i>Tax: $${tax.toFixed(2)}</i></div>`);
-    $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form align="center" method="GET" action="/checkout/${location_id}"><input class="btn btn-primary" type="submit" value="Checkout"></form>`);
+    // displays total information, after the individual donut information has been retrieved by the database
+    setTimeout(function() {
+      let dozens = Math.floor(totalQty / 12);
+      let discount = dozens * 5.99;
 
-  }, 150);
+      // adds discount for each dozen purchased
+      if (dozens >= 1) {
+        $cart.append(`<div class = "totalcart"><i>Dozen Discount: -$${discount.toFixed(2)}</i></div>`);
+      }
 
+      // displays taxes, total price, and checkout button
+      let tax = ((Number(totalPrice - discount) * 0.13));
+      $cart.append(`<div class = "totalcart"><i>Tax: $${tax.toFixed(2)}</i></div>`);
+      $cart.append(`<div class = "totalcart finaltotal"><b>Total: $${(totalPrice - discount + tax).toFixed(2)}</b></div><form align="center" method="GET" action="/checkout/${location_id}"><input class="btn btn-primary" type="submit" value="Checkout"></form>`);
+
+    }, 150);
+  }
 };
 
 // removeCookie removes the cookie with id
