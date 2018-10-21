@@ -1,6 +1,5 @@
 #menu {
   width: 20em;
-  /*border: 2px solid #861657;*/
   padding: 1em;
 
   .menu_title {
@@ -9,7 +8,6 @@
     border: 2px #93e1d8 solid;
     border-radius: 5px;
     margin-bottom: 0;
-
   }
 
   img {
@@ -25,7 +23,6 @@
     display: inline;
     font-family: 'Chivo', sans-serif;
     font-size: 1em;
-
   }
 
   .col-md-6 {
@@ -49,73 +46,65 @@
     .description:hover {
       opacity: 1;
     }
-
   }
-
 }
-
-
-
 
 /*button counter*/
 
 .qty {
 width: 150px;
-
 }
 
-
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #aa4465!important;
-    border-color: #861657!important;
-    width: 150px;
-    border-radius: 5px;
-    margin-top: 5px;
-    font-family: 'Arbutus Slab', serif;
-
+  background-color: #aa4465!important;
+  border-color: #861657!important;
+  width: 150px;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-family: 'Arbutus Slab', serif;
 }
 
 
 .qty .count {
-    color: #000;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 1em;
-    font-weight: 700;
-    line-height: 30px;
-    padding: 0 2px;
-    min-width: 35px;
-    text-align: center;
-    width:25%;
-    user-select: none;
-
+  color: #000;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 30px;
+  padding: 0 2px;
+  min-width: 35px;
+  text-align: center;
+  width:25%;
+  user-select: none;
 }
 
 .qty .plus {
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial,sans-serif;
-    text-align: center;
-    border-radius: 50%;
-    user-select: none;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial,sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  user-select: none;
+}
 
-    }
+
 .qty .minus {
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    width: 30px;
-    height: 30px;
-    font: 30px/1 Arial,sans-serif;
-    text-align: center;
-    border-radius: 50%;
-    background-clip: padding-box;
-    user-select: none;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial,sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: padding-box;
+  user-select: none;
 }
 
 
