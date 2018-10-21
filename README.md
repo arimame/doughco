@@ -4,7 +4,7 @@
 
 Dough Co. is a food ordering app for a fictitious doughnut shop with two locations. Users can visit the website, select one or more doughnuts from the available menu, and place an order for pick-up. 
 
-When an order is placed the donut shop receives the order via SMS. The restaurant can then specify how long it will take to fulfill it. Once they provide this information, the website updates for the client, and also notifies them via SMS.
+When an order is placed, the doughnut shop receives the order via SMS. The restaurant can then specify how long it will take to fulfill it. Once they provide this information, the website updates for the client, and also notifies them via SMS.
 
 This app uses Twilio to implement SMS communication from the website to both the client and restaurant.
 
