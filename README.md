@@ -11,7 +11,7 @@ This app uses Twilio to implement SMS communication from the website to both the
 ## Final Project
 !["Screenshot of homepage"](https://github.com/Ianden/doughco/blob/master/public/images/ScreenShot-Homepage.png)
 !["Screenshot of menu"](https://github.com/Ianden/doughco/blob/master/public/images/ScreenShot-Menupage.png)
-!["Screenshot of checkout"](https://github.com/Ianden/doughco/commit/1ccd3252e58935c78763f974c8dfa85dd5b8a434)
+!["Screenshot of checkout"](https://github.com/Ianden/doughco/blob/master/public/images/ScreenShot-Checkoutpage.png)
 
 ## Dependencies
 
