@@ -1,8 +1,8 @@
 
 exports.up = function(knex, Promise) {
     return knex.schema.table('location', function (table) {
-    table.decimal('lat');
-    table.decimal('long');
+    table.string('lat');
+    table.string('long');
   });
 
 };
