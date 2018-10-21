@@ -1,6 +1,7 @@
 .navbar {
   background-color: #ddfff7;
   font-family: 'Chivo', sans-serif;
+
 }
 
 #logo {
@@ -16,5 +17,8 @@
   border-color: #93e1d8;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color: #861657!important;
+}
 
 

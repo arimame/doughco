@@ -1,3 +1,7 @@
+var kingSpadina =;
+var bloorYonge =''
+
+
 // Initialize and add the map
 function initMap() {
     // The location of LHL

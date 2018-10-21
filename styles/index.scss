@@ -10,12 +10,6 @@
 }
 
 
-
-#mission {
-color: #861657;
-
-}
-
 #minilogo {
   font-family: 'Bungee Shade', cursive;
   color: #861657;
@@ -25,10 +19,14 @@ color: #861657;
 
 .center {
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+
 }
 
+.main {
+    font-family: 'Chivo', sans-serif;
+}
 
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -39,4 +37,10 @@ color: #861657;
     margin-top: 5px;
     font-family: 'Arbutus Slab', serif;
 
+}
+
+
+img {
+  width: 75%;
+  border-radius: 5px;
 }
