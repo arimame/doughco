@@ -6,6 +6,7 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
+  // get user object, given email
   router.get("/:email", (req, res) => {
     knex('users')
       .where({email: req.params.email})
@@ -14,6 +15,7 @@ module.exports = (knex) => {
     });
   });
 
+  // 'handle registration' (albeit badly)
   router.post("/register", (req, res) => {
   	const {email, password} = req.body || undefined;
   	const hashedPassword = bcrypt.hashSync(password, 10);

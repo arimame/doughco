@@ -79,6 +79,8 @@ app.get("/checkout/:id", (req, res) => {
   res.render("checkout", {currUser: req.session.user, location_id: req.params.id});
 });
 
+
+// retrieve contents of a message sent back by restaurant, update order status
 app.post('/sms', (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/xml'});
   const time = req.body['Body'];
@@ -86,10 +88,10 @@ app.post('/sms', (req, res) => {
   res.end();
 });
 
+// processing state for order; not yet confirmed but restaurant notified
 app.post("/checkout/process", (req, res) => {
   const cart = JSON.parse(req.body.cart);
   const clientEmail = req.body.clientEmail;
-  const storePhone = req.body.storePhone;
 
   let body = `New order from ${clientEmail}:\n`;
 
@@ -102,16 +104,16 @@ app.post("/checkout/process", (req, res) => {
   .create({
      body: body,
      from: '+16474944728',
-     to: '+12047208938' // change to storePhone
+     to: '+12047208938'
    })
   .then(message => console.log(message.sid))
   .done();
 
 })
 
+// used to check the status of an order
 app.get('/check-status', sseExpress(), function(req, res) {
   req.socket.setKeepAlive();
-  console.log('checking status..........');
   function check() {
     if (order.status === 1) {
       res.sse({
@@ -126,11 +128,13 @@ app.get('/check-status', sseExpress(), function(req, res) {
   check();
 });
 
+// page user is brought to while waiting for order to be confirmed
 app.get('/order/purgatory/:clientPhone', (req, res) => {
   res.render('order-purgatory', {clientPhone: req.params.clientPhone,
                                 currUser: req.session.user});
 });
 
+// page user is brought to when the order is confiremdd
 app.get('/order-confirmed/:clientPhone', (req, res) => {
   const clientPhone = req.params.clientPhone;
 
@@ -151,10 +155,6 @@ app.get('/logout', (req, res) => {
 	req.session = null;
 	res.redirect('locations');
 });
-
-// app.post("/locations/:loc_id/food/:food_id"), (req, res) => {
-
-// })
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
