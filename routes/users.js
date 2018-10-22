@@ -6,15 +6,6 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  // router.get("/", (req, res) => {
-  //   knex
-  //     .select("*")
-  //     .from("users")
-  //     .then((results) => {
-  //       res.json(results);
-  //   });
-  // });
-
   router.get("/:email", (req, res) => {
     knex('users')
       .where({email: req.params.email})
@@ -45,7 +36,6 @@ module.exports = (knex) => {
     knex('users')
     .where({email: req.params.email})
     .update({
-      // is Number needed??
       name: name, card_number: Number(card_number), card_security: Number(card_security), card_expire: Number(card_expire)
     }).then((results) => {
       console.log(`\nUpdated card information for ${req.params.email}. Fancy.\n`);
@@ -60,7 +50,6 @@ module.exports = (knex) => {
     knex('users')
     .where({email: req.params.email})
     .update({
-      // is Number needed??
       email, phone: Number(phone)
     }).then((results) => {
       console.log(`\nUpdated contact information for ${req.params.email}. Groovy.\n`);
